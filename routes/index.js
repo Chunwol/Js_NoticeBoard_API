@@ -1,21 +1,31 @@
 const express = require('express');
-const post = require('./post/post');
-const reply = require('./reply/reply');
-const user = require('./user/user');
+
+const delete_board = require('./board/delete').delete_board;
+const get_board = require('./board/get').get_board;
+const patch_board = require('./board/patch').patch_board;
+const post_board = require('./board/post').post_board;
+
+const delete_comment = require('./boardComment/delete').delete_comment;
+const get_comment = require('./boardComment/get').get_comment;
+const patch_comment = require('./boardComment/patch').patch_comment;
+const post_comment = require('./boardComment/post').post_comment;
+
+const register = require('./user/register').register;
+const login = require('./user/login').login;
 const router = express.Router();
 
-router.post('/post/create', post.post_insert);
-router.delete('/post/delete/:id', post.post_delete);
-router.put('/post/update/:id', post.post_update);
-router.get('/post/show', post.post_show);
-router.get('/post/show/:id', post.post_show_id);
+router.post('/board', post_board);
+router.delete('/board/:pk', delete_board);
+router.patch('/board/:pk', patch_board);
+router.get('/board', get_board);
+router.get('/board/:pk', get_board);
 
-router.post('/reply/create/:id', reply.reply_insert);
-router.delete('/reply/delete/:id', reply.reply_delete);
-router.put('/reply/update/:id', reply.reply_update);
-router.get('/reply/show/:id', reply.reply_show);
+router.post('/comment/:pk', post_comment);
+router.delete('/comment/:pk', delete_comment);
+router.patch('/comment/:pk', patch_comment);
+router.get('/comment/:pk', get_comment);
 
-router.post('/signin', user.register);
-router.post('/login', user.login);
+router.post('/register', register);
+router.post('/login', login);
 
 module.exports = router;
