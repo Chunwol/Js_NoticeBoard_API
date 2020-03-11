@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const Board = require('../../models').board;
+const Board = require('../../database').board;
 require('dotenv').config();
 const env = process.env;
 
@@ -14,7 +14,7 @@ exports.delete_board = (req, res) => {
             res.status(500).json({ success: false });
         });
         const { user_pk } = board;
-        const { pk : decoded_pk } = decoded;
+        const { decoded_pk } = decoded.pk;
         if (decoded_pk == user_pk) {
             await Board.destroy({
                 where: { pk }

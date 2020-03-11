@@ -1,4 +1,4 @@
-const Comment = require('../../models').comment;
+const Comment = require('../../database').comment;
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 

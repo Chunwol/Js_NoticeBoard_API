@@ -1,22 +1,22 @@
 const jwt = require('jsonwebtoken');
-const Comment = require('../../models').comment;
+const Comment = require('../../database').comment;
 require('dotenv').config();
 const env = process.env;
 
 exports.patch_comment = (req, res) => {
-  const { token, content } = req.body;
+  const { content } = req.body;
+  const { token } = req.headers;
   const { pk } = req.params;
   jwt.verify(token, env.TOKEN_SECRET, async (err, decoded) => {
-    if (err = null) {
+    if (err == null) {
         const comment = await Comment.findOne({
           where: { pk }
         })
         .catch(err => {
             res.status(500).json({ success: false });
         });
-
         const { user_pk } = comment;
-        const { pk : decoded_pk } = decoded;
+        const { decoded_pk } = decoded.pk;
         if (decoded_pk == user_pk) {
             await Comment.update(
                 {

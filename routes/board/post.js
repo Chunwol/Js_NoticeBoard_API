@@ -7,9 +7,9 @@ exports.post_board = (req, res) => {
   const { token } = req.headers;
   jwt.verify(token, env.TOKEN_SECRET, async (err, decoded) => {
     if (err == null) {
-      const { pk } = decoded;
+      const { user_pk } = decoded.pk;
       const board = await Board.create({
-        user_pk: pk,
+        user_pk,
         title,
         content
       }).catch(err => {
@@ -17,7 +17,7 @@ exports.post_board = (req, res) => {
       });
       
       if (board) {
-        const { pk : board_pk } = board;
+        const { board_pk } = board.pk;
         res.status(200).json({ success: true, pk : board_pk });
       } else{
         res.status(412).json({ success: false });

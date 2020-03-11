@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('user', {
+  const user = sequelize.define('user', {
     pk: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -21,4 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
+  user.associate = function (models) {
+    user.hasMany(models.board);
+    user.hasMany(models.comment);
+  };
+
+  return user;
 };

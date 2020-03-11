@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
-
   comment.associate = models => {
     comment.belongsTo(models.board, {
       foreignKey: 'post_pk'

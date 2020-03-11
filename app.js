@@ -6,7 +6,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 
 //넣은것
-const sequelize = require('./models').sequelize;
+const sequelize = require('./database').sequelize;
 
 const app = express();
 
