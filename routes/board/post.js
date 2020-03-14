@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const Board = require('../../models').board;
+const Board = require('../../database').board;
 require('dotenv').config();
 const env = process.env;
 exports.post_board = (req, res) => {
@@ -7,7 +7,7 @@ exports.post_board = (req, res) => {
   const { token } = req.headers;
   jwt.verify(token, env.TOKEN_SECRET, async (err, decoded) => {
     if (err == null) {
-      const { user_pk } = decoded.pk;
+      const { pk : user_pk } = decoded;
       const board = await Board.create({
         user_pk,
         title,

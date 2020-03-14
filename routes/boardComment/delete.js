@@ -15,7 +15,7 @@ exports.delete_comment = (req, res) => {
           res.status(500).json({ success: false });
         });
         const { user_pk } = comment;
-        const { decoded_pk } = decoded.pk;
+        const { pk : decoded_pk } = decoded;
         if (decoded_pk == user_pk) {
             await Comment.destroy({
                 where: { pk }

@@ -9,7 +9,7 @@ exports.post_comment = (req, res) => {
     const { content } = req.body;
     jwt.verify(token, env.TOKEN_SECRET, async (err, decoded) => {
         if (err == null) {
-            const { user_pk } = decoded.pk;
+            const { pk : user_pk } = decoded;
             const board = await Comment.create({
                 post_pk,
                 user_pk,
