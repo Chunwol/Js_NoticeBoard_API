@@ -18,7 +18,7 @@ exports.post_board = (req, res) => {
         });
         
         if (board) {
-          const { board_pk } = board.pk;
+          const { pk : board_pk } = board;
           res.status(200).json({ success: true, pk : board_pk });
         } else{
           res.status(412).json({ success: false });
