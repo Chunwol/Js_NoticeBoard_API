@@ -21,10 +21,16 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
-  user.associate = function (models) {
-    user.hasMany(models.board);
-    user.hasMany(models.comment);
-  };
+  user.associate = models => {
+    user.hasMany(models.board, {
+      foreignKey: "user_pk",
+      sourceKey: "pk"
+    });
+    user.hasMany(models.comment, {
+      foreignKey: "user_pk",
+      sourceKey: "pk"
+    });
+  }
 
   return user;
 };

@@ -9,21 +9,14 @@ exports.get_board = async (req, res) => {
             const { pk } = req.params;
             if(pk){
                 const board = await Board.findOne({
+                    include: [{ model: Comment}],
                     where: { pk }
                 })
                 .catch(err => {
-                    res.status(500).json({ success: false });
+                    res.status(500).json({ success: false, err });
                 });
                 if(board){
-                    const comment = await Comment.findAll({
-                        where: {
-                          post_pk: pk 
-                        }
-                    })
-                    .catch(err => {
-                        res.status(500).json({ success: false });
-                    });
-                    res.status(200).json({ success: true, board, comment });
+                    res.status(200).json({ success: true, board });
                 } else{
                     res.status(412).json({ success: false });
                 }

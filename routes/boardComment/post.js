@@ -4,7 +4,7 @@ require('dotenv').config();
 const env = process.env;
 
 exports.post_comment = (req, res) => {
-    const { pk : post_pk } = req.params;
+    const { pk : board_pk } = req.params;
     const { token } = req.headers;
     const { content } = req.body;
     if(content && token){
@@ -12,7 +12,7 @@ exports.post_comment = (req, res) => {
             if (err == null) {
                 const { pk : user_pk } = decoded;
                 const comment = await Comment.create({
-                    post_pk,
+                    board_pk,
                     user_pk,
                     content
                 })

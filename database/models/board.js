@@ -23,7 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     board.belongsTo(models.user, {
       foreignKey: 'user_pk'
     });
-    board.hasMany(models.comment);
+    board.hasMany(models.comment, {
+      foreignKey: "board_pk",
+      sourceKey: "pk"
+    });
   };
 
   return board;

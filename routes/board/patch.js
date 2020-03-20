@@ -36,6 +36,8 @@ exports.patch_board = (req, res) => {
             } else {
               res.status(412).json({ success: false });
             }
+          }else {
+            res.status(412).json({ success: false });
           }
       } else {
         res.status(412).json({ success: false });

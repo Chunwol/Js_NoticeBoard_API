@@ -16,8 +16,8 @@ exports.post_board = (req, res) => {
         }).catch(err => {
           res.status(500).json({ success: false });
         });
-        const { pk : post_pk } = board;
-        res.status(200).json({ success: true, pk : post_pk });
+        const { pk : board_pk } = board;
+        res.status(200).json({ success: true, pk : board_pk });
       } else{
         res.status(412).json({ success: false });
       }

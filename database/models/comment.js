@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    post_pk: {
+    board_pk: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   comment.associate = models => {
     comment.belongsTo(models.board, {
-      foreignKey: 'post_pk'
+      foreignKey: 'board_pk'
     });
     comment.belongsTo(models.user, {
       foreignKey: 'user_pk'
