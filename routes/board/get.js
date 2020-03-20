@@ -8,7 +8,7 @@ exports.get_board = async (req, res) => {
         case "post":
             const { pk } = req.params;
             if(pk){
-                const board = await Comment.findOne({
+                const board = await Board.findOne({
                     where: { pk }
                 })
                 .catch(err => {
