@@ -10,6 +10,8 @@ exports.login = async (req, res) => {
         id,
         password
       }
+    }).catch(err => {
+      res.status(500).json({ success: false });
     });
   
     if (user) {

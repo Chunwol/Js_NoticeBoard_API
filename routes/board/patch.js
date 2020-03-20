@@ -16,8 +16,9 @@ exports.patch_board = (req, res) => {
           .catch(err => {
             res.status(500).json({ success: false });
           });
-          const { user_pk } = board;
-          const { pk : decoded_pk } = decoded;
+          if(board){
+            const { user_pk } = board;
+            const { pk : decoded_pk } = decoded;
             if (decoded_pk == user_pk) {
               await Board.update(
                   {
@@ -35,6 +36,7 @@ exports.patch_board = (req, res) => {
             } else {
               res.status(412).json({ success: false });
             }
+          }
       } else {
         res.status(412).json({ success: false });
       }

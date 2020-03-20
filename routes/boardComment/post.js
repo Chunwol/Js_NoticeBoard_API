@@ -11,7 +11,7 @@ exports.post_comment = (req, res) => {
         jwt.verify(token, env.TOKEN_SECRET, async (err, decoded) => {
             if (err == null) {
                 const { pk : user_pk } = decoded;
-                const board = await Comment.create({
+                const comment = await Comment.create({
                     post_pk,
                     user_pk,
                     content
@@ -20,7 +20,7 @@ exports.post_comment = (req, res) => {
                     res.status(500).json({ success: false });
                 });
     
-                if(board){
+                if(comment){
                     res.status(200).json({ success: true });
                 }else {
                     res.status(412).json({ success: false });
